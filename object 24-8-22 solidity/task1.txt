@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.16;
+contract A{
+    uint data;      // State variable
+    constructor (uint _data) {
+      data = _data;
+   }
+    function get_value () public view returns (uint) {
+      return data;
+    }
+}

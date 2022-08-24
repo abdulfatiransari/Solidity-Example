@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.16;
+contract B{
+    function evaluate (int a, int b) public pure returns (int){
+        int add = (a + b);
+        int subtract = (a - b);
+        int result = add - subtract;
+        return result;
+    }
+}
