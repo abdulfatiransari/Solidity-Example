@@ -3,7 +3,7 @@ pragma solidity 0.8.16;
 contract C{
     function find (int a) public pure returns (int){
         if(a>0){
-            int remainder = a*3;
+            int remainder = a % 3;
             return remainder;
         }
         else{
