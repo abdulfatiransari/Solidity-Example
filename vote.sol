@@ -46,5 +46,9 @@ contract voting{
         require(isBlacklisted[_user], "user already whitelisted");
         isBlacklisted[_user] = false;
     }
+
+    function verify(address _user) public view returns(bool) {
+                return isBlacklisted[_user];
+        }
     
 }
