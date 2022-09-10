@@ -13,42 +13,36 @@ contract voting{
     }
 
     // mapping(address => bool) whitelistedAddresses;
-    mapping(address=>bool) isBlacklisted;
+    mapping(address=>bool) user_status;
 
     modifier onlyadmin() {
         require(msg.sender == admin,"Your are not Admin");
         _;
     }
 
-    Voter[] public voter;
+    Voter[] private voter;
 
     function vote (string memory _name, address _address) external {
         voter.push(Voter(_name, _address));
         
     }
-
-    // function addUser(address _addressToWhitelist) public onlyadmin {
-    //     whitelistedAddresses[_addressToWhitelist] = true;
-    // }
-
-    // function verifyUser(address _whitelistedAddress) public view returns(bool) {
-    //     bool userIsWhitelisted = whitelistedAddresses[_whitelistedAddress];
-    //     return userIsWhitelisted;
-    // }
-
+    function getvoters() public view returns (Voter[] memory){
+        require (msg.sender == admin, "You are not admin");
+        return voter ;
+    }
 
     function blackList(address _user) public onlyadmin {
-        require(!isBlacklisted[_user], "user already blacklisted");
-        isBlacklisted[_user] = true;
+        require(!user_status[_user], "user already blacklisted");
+        user_status[_user] = false;
     }
     
     function whitelist(address _user) public onlyadmin {
-        require(isBlacklisted[_user], "user already whitelisted");
-        isBlacklisted[_user] = false;
+        require(user_status[_user], "user already whitelisted");
+        user_status[_user] = true;
     }
 
     function verify(address _user) public view returns(bool) {
-                return isBlacklisted[_user];
+                return user_status[_user];
         }
     
 }
